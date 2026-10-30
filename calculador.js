@@ -35,4 +35,12 @@ function mostrarMedia(){
     if (!notaValida(forum) || !(tarefas) || !notaValida(prova)) {
         document.getElementById("resultado").textContent = 'Sua média é ${media.toFixed(2)}'
     }
-function
+
+function mostrarNotaNecessaria() {
+   const forum = lerNumero("forum");
+   const tarefas = lerNumero("tarefas");
+   const mediaDesejada = lerNumero("mediaDesejada");
+
+   if
+
+}
