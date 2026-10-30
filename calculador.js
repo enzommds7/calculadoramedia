@@ -26,21 +26,40 @@ function notaValida(n){
     return !Number.isNaN(n) && n >= 0 && n <= 10; 
 }
 
-function mostrarMedia(){
+function mostrarMedia() {
+    const forum = lerNumero("forum");
+    const tarefas = lerNumero("tarefas");
+    const prova = lerNumero("prova");
+
+    if (!notaValida(forum) || !notaValida(tarefas) || !notaValida(prova)) {
+        document.getElementById("resultado").textContent = "Digite notas entre 0 e 10.";
+        return;
+    }
+
+    const media = calcularMedia(forum, tarefas, prova);
+    document.getElementById("resultado").textContent = `Sua média é ${media.toFixed(2)}`;
+}
+
+function mostrarNotaNecessaria() {
     const forum = lerNumero("forum");
     const tarefas = lerNumero("tarefas");
     const mediaDesejada = lerNumero("mediaDesejada");
 
-
-    if (!notaValida(forum) || !(tarefas) || !notaValida(prova)) {
-        document.getElementById("resultado").textContent = 'Sua média é ${media.toFixed(2)}'
+    if (!notaValida(forum) || !notaValida(tarefas) || !notaValida(mediaDesejada)) {
+        document.getElementById("resultado").textContent = "Digite notas entre 0 e 10.";
+        return;
     }
 
-function mostrarNotaNecessaria() {
-   const forum = lerNumero("forum");
-   const tarefas = lerNumero("tarefas");
-   const mediaDesejada = lerNumero("mediaDesejada");
+    const necessaria = notaNecessariaNaProva(forum, tarefas, mediaDesejada);
 
-   if
+    let mensagem;
+    if (necessaria > 10) {
+        mensagem = `Não é possível: você precisaria de ${necessaria.toFixed(2)} na prova.`;
+    } else if (necessaria <= 0) {
+        mensagem = "Você já atingiu a média, mesmo tirando 0 na prova.";
+    } else {
+        mensagem = `Você precisa de ${necessaria.toFixed(2)} na prova.`;
+    }
 
+    document.getElementById("resultado").textContent = mensagem;
 }
